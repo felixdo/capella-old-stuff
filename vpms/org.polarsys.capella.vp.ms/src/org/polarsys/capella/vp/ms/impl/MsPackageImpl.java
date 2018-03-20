@@ -1,10 +1,10 @@
 /*******************************************************************************
- * Copyright (c) 2017 THALES GLOBAL SERVICES and others.
+ * Copyright (c) 2017, 2018 THALES GLOBAL SERVICES and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *   
+ *
  * Contributors:
  *    Thales - initial API and implementation
  *    Altran - Compare Configurations
@@ -56,118 +56,118 @@ import org.polarsys.kitalpha.emde.model.EmdePackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!-- end-user-doc -->
- * 
+ *
  * @generated
  */
 public class MsPackageImpl extends EPackageImpl implements MsPackage {
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
   private EClass csConfigurationEClass = null;
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
   private EClass fsmTypeEClass = null;
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
   private EClass situationEClass = null;
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
   private EClass booleanExpressionEClass = null;
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
   private EClass booleanOperationEClass = null;
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
   private EClass inStateExpressionEClass = null;
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
   private EClass inSituationExpressionEClass = null;
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
   private EClass andOperationEClass = null;
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
   private EClass orOperationEClass = null;
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
   private EClass notOperationEClass = null;
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
   private EClass comparisonEClass = null;
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
   private EClass resultEClass = null;
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
   private EEnum kind_TypeEEnum = null;
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
   private EEnum access_TypeEEnum = null;
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
   private EEnum selector_TypeEEnum = null;
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
   private EEnum ms_TypeEEnum = null;
@@ -179,7 +179,7 @@ public class MsPackageImpl extends EPackageImpl implements MsPackage {
    * Note: the correct way to create the package is via the static factory method {@link #init init()}, which also
    * performs initialization of the package, or returns the registered package, if one already exists. <!--
    * begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @see org.eclipse.emf.ecore.EPackage.Registry
    * @see org.polarsys.capella.vp.ms.ms.MsPackage#eNS_URI
    * @see #init()
@@ -191,19 +191,19 @@ public class MsPackageImpl extends EPackageImpl implements MsPackage {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
   private static boolean isInited = false;
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>
    * This method is used to initialize {@link MsPackage#eINSTANCE} when that field is accessed. Clients should not
    * invoke it directly. Instead, they should simply access that field to obtain the package. <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * 
+   *
    * @see #eNS_URI
    * @see #createPackageContents()
    * @see #initializePackageContents()
@@ -215,7 +215,8 @@ public class MsPackageImpl extends EPackageImpl implements MsPackage {
 
     // Obtain or create and register package
     MsPackageImpl theMsPackage = (MsPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof MsPackageImpl
-        ? EPackage.Registry.INSTANCE.get(eNS_URI) : new MsPackageImpl());
+        ? EPackage.Registry.INSTANCE.get(eNS_URI)
+        : new MsPackageImpl());
 
     isInited = true;
 
@@ -249,367 +250,407 @@ public class MsPackageImpl extends EPackageImpl implements MsPackage {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EClass getCSConfiguration() {
     return csConfigurationEClass;
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EReference getCSConfiguration_SupportedModes() {
     return (EReference) csConfigurationEClass.getEStructuralFeatures().get(0);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EReference getCSConfiguration_Elements() {
     return (EReference) csConfigurationEClass.getEStructuralFeatures().get(1);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EReference getCSConfiguration_DeploymentLinks() {
     return (EReference) csConfigurationEClass.getEStructuralFeatures().get(2);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EReference getCSConfiguration_Functions() {
     return (EReference) csConfigurationEClass.getEStructuralFeatures().get(3);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EReference getCSConfiguration_FunctionalChains() {
     return (EReference) csConfigurationEClass.getEStructuralFeatures().get(4);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EReference getCSConfiguration_Scenarios() {
     return (EReference) csConfigurationEClass.getEStructuralFeatures().get(5);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EReference getCSConfiguration_Components() {
     return (EReference) csConfigurationEClass.getEStructuralFeatures().get(6);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EReference getCSConfiguration_Ports() {
     return (EReference) csConfigurationEClass.getEStructuralFeatures().get(7);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EReference getCSConfiguration_ChildConfigurations() {
     return (EReference) csConfigurationEClass.getEStructuralFeatures().get(8);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EAttribute getCSConfiguration_Kind() {
     return (EAttribute) csConfigurationEClass.getEStructuralFeatures().get(9);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EAttribute getCSConfiguration_Access() {
     return (EAttribute) csConfigurationEClass.getEStructuralFeatures().get(10);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EAttribute getCSConfiguration_Selector() {
     return (EAttribute) csConfigurationEClass.getEStructuralFeatures().get(11);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EReference getCSConfiguration_Context() {
     return (EReference) csConfigurationEClass.getEStructuralFeatures().get(12);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EReference getCSConfiguration_CompareTo() {
     return (EReference) csConfigurationEClass.getEStructuralFeatures().get(13);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EClass getFSMType() {
     return fsmTypeEClass;
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EAttribute getFSMType_Ms() {
     return (EAttribute) fsmTypeEClass.getEStructuralFeatures().get(0);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EClass getSituation() {
     return situationEClass;
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EReference getSituation_Expression() {
     return (EReference) situationEClass.getEStructuralFeatures().get(0);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EClass getBooleanExpression() {
     return booleanExpressionEClass;
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EClass getBooleanOperation() {
     return booleanOperationEClass;
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EReference getBooleanOperation_Children() {
     return (EReference) booleanOperationEClass.getEStructuralFeatures().get(0);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EClass getInStateExpression() {
     return inStateExpressionEClass;
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EReference getInStateExpression_State() {
     return (EReference) inStateExpressionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EClass getInSituationExpression() {
     return inSituationExpressionEClass;
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EReference getInSituationExpression_Situation() {
     return (EReference) inSituationExpressionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EClass getAndOperation() {
     return andOperationEClass;
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EClass getOrOperation() {
     return orOperationEClass;
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EClass getNotOperation() {
     return notOperationEClass;
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EClass getComparison() {
     return comparisonEClass;
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EReference getComparison_Configuration1() {
     return (EReference) comparisonEClass.getEStructuralFeatures().get(0);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EReference getComparison_Situation() {
     return (EReference) comparisonEClass.getEStructuralFeatures().get(1);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EReference getComparison_Configuration2() {
     return (EReference) comparisonEClass.getEStructuralFeatures().get(2);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EClass getResult() {
     return resultEClass;
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EReference getResult_Situation() {
     return (EReference) resultEClass.getEStructuralFeatures().get(0);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EEnum getkind_Type() {
     return kind_TypeEEnum;
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EEnum getaccess_Type() {
     return access_TypeEEnum;
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EEnum getselector_Type() {
     return selector_TypeEEnum;
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public EEnum getms_Type() {
     return ms_TypeEEnum;
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
+  @Override
   public MsFactory getMsFactory() {
     return (MsFactory) getEFactoryInstance();
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
   private boolean isCreated = false;
@@ -617,7 +658,7 @@ public class MsPackageImpl extends EPackageImpl implements MsPackage {
   /**
    * Creates the meta-model objects for the package. This method is guarded to have no affect on any invocation but its
    * first. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
   public void createPackageContents() {
@@ -682,7 +723,7 @@ public class MsPackageImpl extends EPackageImpl implements MsPackage {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
   private boolean isInitialized = false;
@@ -690,7 +731,7 @@ public class MsPackageImpl extends EPackageImpl implements MsPackage {
   /**
    * Complete the initialization of the package and its meta-model. This method is guarded to have no affect on any
    * invocation but its first. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
   public void initializePackageContents() {
@@ -891,29 +932,29 @@ public class MsPackageImpl extends EPackageImpl implements MsPackage {
   /**
    * Initializes the annotations for <b>http://www.polarsys.org/kitalpha/emde/1.0.0/constraint</b>. <!-- begin-user-doc
    * --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
   protected void createConstraintAnnotations() {
     String source = "http://www.polarsys.org/kitalpha/emde/1.0.0/constraint"; //$NON-NLS-1$
     addAnnotation(csConfigurationEClass, source,
-        new String[] { "ExtendedElement", " http://www.polarsys.org/capella/core/cs/1.1.0#//Component" //$NON-NLS-1$ //$NON-NLS-2$
+        new String[] { "ExtendedElement", " http://www.polarsys.org/capella/core/cs/1.2.0#//Component" //$NON-NLS-1$ //$NON-NLS-2$
         });
     addAnnotation(fsmTypeEClass, source,
-        new String[] { "ExtendedElement", " http://www.polarsys.org/capella/core/common/1.1.0#//StateMachine" //$NON-NLS-1$ //$NON-NLS-2$
+        new String[] { "ExtendedElement", " http://www.polarsys.org/capella/core/common/1.2.0#//StateMachine" //$NON-NLS-1$ //$NON-NLS-2$
         });
     addAnnotation(situationEClass, source,
-        new String[] { "ExtendedElement", " http://www.polarsys.org/capella/core/cs/1.1.0#//Component" //$NON-NLS-1$ //$NON-NLS-2$
+        new String[] { "ExtendedElement", " http://www.polarsys.org/capella/core/cs/1.2.0#//Component" //$NON-NLS-1$ //$NON-NLS-2$
         });
     addAnnotation(comparisonEClass, source,
-        new String[] { "ExtendedElement", " http://www.polarsys.org/capella/core/cs/1.1.0#//Component" //$NON-NLS-1$ //$NON-NLS-2$
+        new String[] { "ExtendedElement", " http://www.polarsys.org/capella/core/cs/1.2.0#//Component" //$NON-NLS-1$ //$NON-NLS-2$
         });
   }
 
   /**
    * Initializes the annotations for <b>http://www.polarsys.org/kitalpha/emde/1.0.0/constraintMapping</b>. <!--
    * begin-user-doc --> <!-- end-user-doc -->
-   * 
+   *
    * @generated
    */
   protected void createConstraintMappingAnnotations() {
