@@ -127,7 +127,7 @@ public class I_FE_ExchangeItemConsistency extends AbstractComponentValidationRul
             resultLocus.add(ei);
             resultLocus.add(i);
             resultLocus.addAll(rightCandidates);
-            errors.add(ConstraintStatus.createStatus(ctx, ei, resultLocus, getMessageTemplate(ctx), ei, i, leftRole, leftComponent, rightRole, rightComponent));
+            errors.add(ConstraintStatus.createStatus(ctx, ei, resultLocus, getMessageTemplate(ctx), i, leftRole, leftComponent, rightRole, rightComponent, ei));
           }
         }
       }

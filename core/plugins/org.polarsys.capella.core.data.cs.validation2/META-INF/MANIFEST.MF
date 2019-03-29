@@ -14,5 +14,6 @@ Automatic-Module-Name: org.polarsys.capella.core.validation.cs.proto
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
 Export-Package: org.polarsys.capella.core.data.cs.validation2,
+ org.polarsys.capella.core.data.cs.validation2.helpers,
  org.polarsys.capella.core.data.cs.validation2.tests,
  org.polarsys.capella.core.data.cs.validation2.tests.common
