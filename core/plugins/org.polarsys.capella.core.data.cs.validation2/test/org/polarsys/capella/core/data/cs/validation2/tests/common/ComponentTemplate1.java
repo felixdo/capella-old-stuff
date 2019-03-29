@@ -1,6 +1,6 @@
 package org.polarsys.capella.core.data.cs.validation2.tests.common;
 
-import static org.polarsys.capella.core.model.helpers.Allocators.allocate;
+import static org.polarsys.capella.core.data.cs.validation2.helpers.Allocators.allocate;
 
 import org.polarsys.capella.core.data.cs.PhysicalPort;
 import org.polarsys.capella.core.data.fa.ComponentPort;
