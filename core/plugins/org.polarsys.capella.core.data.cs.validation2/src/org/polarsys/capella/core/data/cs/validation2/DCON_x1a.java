@@ -21,6 +21,16 @@ public class DCON_x1a extends AbstractComponentValidationRule {
 
   public static final String RULE_ID = "org.polarsys.capella.core.data.cs.validation2.DCON_x1a"; //$NON-NLS-1$
 
+  /**
+   * Internal code used by the quickfix provider
+   */
+  public static final int FIPS = 1;
+
+  /**
+   * Internal code used by the quickfix provider
+   */
+  public static final int FOPS = 2;
+
   protected void validateComponent(IValidationContext ctx, Component component, Collection<IStatus> errors) {
 
     for (ComponentPort port : component.getContainedComponentPorts()) {
@@ -31,13 +41,13 @@ public class DCON_x1a extends AbstractComponentValidationRule {
 
       for (Interface i : port.getProvidedInterfaces()) {
         for (ExchangeItem ei : findMissing(i, fips, FaPackage.Literals.FUNCTION_INPUT_PORT__INCOMING_EXCHANGE_ITEMS)) {
-          makeError(ctx, component, errors, port, i, ei);
+          makeError(ctx, component, errors, port, i, ei, FIPS);
         }
       }
 
       for (Interface i : port.getRequiredInterfaces()) {
         for (ExchangeItem ei : findMissing(i, fops, FaPackage.Literals.FUNCTION_OUTPUT_PORT__OUTGOING_EXCHANGE_ITEMS)) {
-          makeError(ctx, component, errors, port, i, ei);
+          makeError(ctx, component, errors, port, i, ei, FOPS);
         }
       }
 
@@ -45,14 +55,16 @@ public class DCON_x1a extends AbstractComponentValidationRule {
   }
 
   private void makeError(IValidationContext ctx, Component component, Collection<IStatus> errors, ComponentPort port,
-      Interface i, ExchangeItem ei) {
+      Interface i, ExchangeItem ei, int code) {
     Collection<EObject> resultLocus = new ArrayList<EObject>();
     resultLocus.add(ei);
     resultLocus.add(component);
     resultLocus.add(i);
     resultLocus.add(port);
-    resultLocus.addAll(port.getAllocatedFunctionPorts());
-    errors.add(ConstraintStatus.createStatus(ctx, ei, resultLocus, IStatus.WARNING, 3, getMessageTemplate(ctx),
+    // instead of adding the allocated fips/fops to the locus here, use a specific code that's consumed in
+    // the quickfix provider. this is to reduce the number of elements in the 'goto' menu. 
+    // also see https://bugs.polarsys.org/show_bug.cgi?id=2437
+    errors.add(ConstraintStatus.createStatus(ctx, ei, resultLocus, IStatus.WARNING, code, getMessageTemplate(ctx),
         ei.getName(), i.getName(), component.getName(), port.getName()));
   }
 

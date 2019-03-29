@@ -8,8 +8,10 @@ import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.validation.model.IConstraintStatus;
 import org.polarsys.capella.core.data.cs.Interface;
+import org.polarsys.capella.core.data.fa.ComponentPort;
 import org.polarsys.capella.core.data.fa.FunctionInputPort;
 import org.polarsys.capella.core.data.fa.FunctionOutputPort;
+import org.polarsys.capella.core.data.fa.FunctionPort;
 import org.polarsys.capella.core.data.fa.FunctionalExchange;
 import org.polarsys.capella.core.data.information.ExchangeItem;
 
@@ -70,9 +72,35 @@ public class ExchangeItemAllocationResolver implements CommandResolutionGenerato
 
   @Override
   public Collection<? extends Command> generateResolutionCommands(IConstraintStatus cs) {
+
     if (cs.getTarget() instanceof ExchangeItem && Activator.getContext().getBundle().getSymbolicName().equals(cs.getConstraint().getDescriptor().getPluginId())) {
-      return getResolutionCommands((ExchangeItem) cs.getTarget(), cs.getResultLocus());
+
+      Collection<EObject> resultLocus = cs.getResultLocus();
+
+      if (DCON_x1a.RULE_ID.equals(cs.getConstraint().getDescriptor().getId())) {
+
+        // To reduce #elements in the goto menu, the fxp are not part of the result locus. 
+        // so now, re-add them for the quickfix
+
+        resultLocus = new ArrayList<>();
+
+        for (EObject e : cs.getResultLocus()) {
+          resultLocus.add(e);
+          if (e instanceof ComponentPort) {
+            Collection<? extends FunctionPort> fxp = Collections.emptyList();
+            switch (cs.getCode()) {
+            case DCON_x1a.FIPS: fxp = ModelHelpers.getAllocatedFunctionInputPorts((ComponentPort) e); break;
+            case DCON_x1a.FOPS: fxp = ModelHelpers.getAllocatedFunctionOutputPorts((ComponentPort) e); break;
+            default: break; 
+            }
+            resultLocus.addAll(fxp);
+          }
+        }
+
+      }
+      return getResolutionCommands((ExchangeItem) cs.getTarget(), resultLocus);
     }
+
     return Collections.emptyList();
   }
 
