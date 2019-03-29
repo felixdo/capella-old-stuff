@@ -53,7 +53,7 @@ public class DeallocateExchangeItemCommand extends AbstractExchangeItemCommand {
   final boolean confirmDeletion;
 
   public DeallocateExchangeItemCommand(ExchangeItem exchangeItem, Collection<? extends EObject> targets, boolean confirmDeletion) {
-    super(exchangeItem, targets, "%deallocateExchangeItemCommand_label");
+    super(exchangeItem, targets, "%deallocateExchangeItemCommand_label"); //$NON-NLS-1$
     this.confirmDeletion = confirmDeletion;
   }
 

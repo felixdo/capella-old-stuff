@@ -12,7 +12,8 @@ import org.polarsys.capella.core.data.cs.CsPackage;
 /**
  * A dynamic helper model to allow contextual interface validation of components
  */
-public class InterfaceValidationPackage {
+@SuppressWarnings("nls")
+class InterfaceValidationPackage {
   
   private static final EClass INTERFACE_VALIDATION_CONTEXT;
   private static final EReference LEFT;

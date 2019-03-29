@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.polarsys.capella.core.data.cs.validation2;
 
-import static org.polarsys.capella.core.model.helpers.ExchangeItemAllocator.allocate;
+import static org.polarsys.capella.core.data.cs.validation2.helpers.ExchangeItemAllocator.allocate;
 
 import java.util.Collection;
 
@@ -20,7 +20,7 @@ import org.polarsys.capella.core.data.information.ExchangeItem;
 public class AllocateExchangeItemCommand extends AbstractExchangeItemCommand {
 
   public AllocateExchangeItemCommand(ExchangeItem ei, Collection<? extends EObject> targets) {
-    super(ei, targets,"%allocateExchangeItemCommand_label");
+    super(ei, targets,"%allocateExchangeItemCommand_label"); //$NON-NLS-1$
   }
 
   @Override

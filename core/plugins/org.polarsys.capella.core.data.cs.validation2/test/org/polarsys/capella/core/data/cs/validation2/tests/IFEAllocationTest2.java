@@ -8,7 +8,8 @@ import static org.polarsys.capella.core.data.cs.validation2.FE_I_ExchangeItemCon
 import static org.polarsys.capella.core.data.cs.validation2.I_FE_ExchangeItemConsistency.NO_UNUSED_EI_ON_I_ID;
 import static org.polarsys.capella.core.data.cs.validation2.I_FE_ExchangeItemConsistency.NO_UNUSED_EI_ON_I_WITH_ALLOCATIONS;
 import static org.polarsys.capella.core.data.cs.validation2.tests.common.StatusMatcher.okStatus;
-import static org.polarsys.capella.core.model.helpers.Allocators.allocate;
+import static org.polarsys.capella.core.data.cs.validation2.helpers.Allocators.allocate;
+
 
 import org.eclipse.core.runtime.IStatus;
 import org.polarsys.capella.core.data.cs.Component;

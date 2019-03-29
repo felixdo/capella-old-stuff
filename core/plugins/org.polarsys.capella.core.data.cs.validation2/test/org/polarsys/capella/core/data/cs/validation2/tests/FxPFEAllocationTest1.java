@@ -11,7 +11,8 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertThat;
 
-import static org.polarsys.capella.core.model.helpers.Allocators.allocate;
+import static org.polarsys.capella.core.data.cs.validation2.helpers.Allocators.allocate;
+
 
 import org.eclipse.core.runtime.IStatus;
 

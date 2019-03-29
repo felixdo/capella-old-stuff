@@ -21,7 +21,7 @@ public abstract class AbstractExchangeItemCommand extends RecordingCommand {
     this.targets = targets;
     this.exchangeItem = ei;
     setLabel(NLS.bind(getString(labelKey), EObjectLabelProviderHelper.getText(ei),
-        targets.stream().map(EObjectLabelProviderHelper::getText).collect(Collectors.joining(", ")))); 
+        targets.stream().map(EObjectLabelProviderHelper::getText).collect(Collectors.joining(", "))));  //$NON-NLS-1$
   }
 
   private String getString(String key) {
