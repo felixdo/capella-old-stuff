@@ -8,9 +8,12 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.common.command.CompoundCommand;
 import org.polarsys.capella.common.data.activity.InputPin;
 import org.polarsys.capella.common.data.activity.OutputPin;
 import org.polarsys.capella.core.data.cs.Component;
@@ -221,6 +224,14 @@ public class ModelHelpers {
       return fp.getAllocatorComponentPorts();
     }
     return getAllocatorComponentPortCandidates(fp);
+  }
+
+  public static <T> Collector<T, ?, Command> createCommandCollector(Function<T, Command> handler){
+    return Collector.of(CompoundCommand::new,
+        (Command s, T t)->((CompoundCommand)s).append(handler.apply(t)),
+        (Command s1, Command s2) -> { ((CompoundCommand) s1).append(s2); return s1; },
+        new Collector.Characteristics[0]
+        );
   }
 
 }

@@ -292,6 +292,16 @@
             id="org.polarsys.capella.core.data.cs.validation2.validateInterfaces"
             name="Validate Component Interfaces">
       </command>
+      <command
+            id="org.polarsys.capella.core.data.cs.validation2.propagateFxP2FE"
+            name="%menu_propagateFxP2FE">
+         <commandParameter
+               id="mode"
+               name="Mode"
+               optional="false"
+               values="org.polarsys.capella.core.data.cs.validation2.accel.PropagationModes">
+         </commandParameter>
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -314,6 +324,18 @@
             </and>
          </activeWhen>
       </handler>
+      <handler
+            class="org.polarsys.capella.core.data.cs.validation2.accel.PropagateFxP2FEHandler"
+            commandId="org.polarsys.capella.core.data.cs.validation2.propagateFxP2FE">
+         <activeWhen>
+            <and>
+               <iterate>
+                  <adapt
+                        type="org.polarsys.capella.core.data.fa.FunctionalExchange">
+                  </adapt>
+               </iterate>
+            </and></activeWhen>
+      </handler>
    </extension>
    <extension
          point="org.eclipse.ui.ide.markerResolution">
@@ -321,6 +343,64 @@
             class="org.polarsys.capella.core.data.cs.validation2.ExchangeItemAllocationMarkerResolution"
             markerType="org.polarsys.capella.core.validation.markers">
       </markerResolutionGenerator>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="true"
+            locationURI="popup:capella.project.explorer.menu.accelerator?after=additions">
+         <command
+               commandId="org.polarsys.capella.core.data.cs.validation2.propagateFxP2FE"
+               icon="platform:/plugin/org.polarsys.capella.core.ui.resources/icons/full/obj16/capella_process.gif"
+               style="push">
+            <parameter
+                  name="mode"
+                  value="union">
+            </parameter>
+            <visibleWhen
+                  checkEnabled="true">
+            </visibleWhen>
+         </command>
+         <command
+               commandId="org.polarsys.capella.core.data.cs.validation2.propagateFxP2FE"
+               icon="platform:/plugin/org.polarsys.capella.core.ui.resources/icons/full/obj16/capella_process.gif"
+               style="push">
+            <parameter
+                  name="mode"
+                  value="intersection">
+            </parameter>
+            <visibleWhen
+                  checkEnabled="true">
+            </visibleWhen>
+         </command>
+         <command
+               commandId="org.polarsys.capella.core.data.cs.validation2.propagateFxP2FE"
+               icon="platform:/plugin/org.polarsys.capella.core.ui.resources/icons/full/obj16/capella_process.gif"
+               label="%menu_propagateFxP2FE_select"
+               style="push">
+            <parameter
+                  name="mode"
+                  value="select">
+            </parameter>
+            <visibleWhen
+                  checkEnabled="true">
+            </visibleWhen>
+         </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.popup.any?after=group.accelerator">
+         <menu
+               id="capella.project.explorer.menu.accelerator"
+               label="Modeling Accelerators">
+            <separator
+                  name="groupAccelerator">
+            </separator>
+            <separator
+                  name="additions">
+            </separator>
+         </menu>
+      </menuContribution>
    </extension>
    
 </plugin>

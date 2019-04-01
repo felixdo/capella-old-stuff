@@ -1,5 +1,6 @@
 package org.polarsys.capella.core.data.cs.validation2;
 
+import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
@@ -7,7 +8,7 @@ public class Activator implements BundleActivator {
 
 	private static BundleContext context;
 
-	static BundleContext getContext() {
+	public static BundleContext getContext() {
 		return context;
 	}
 
@@ -25,6 +26,10 @@ public class Activator implements BundleActivator {
 	 */
 	public void stop(BundleContext bundleContext) throws Exception {
 		Activator.context = null;
+	}
+	
+	public static String getResourceString(String key) {
+	  return Platform.getResourceString(getContext().getBundle(), key);
 	}
 
 }
