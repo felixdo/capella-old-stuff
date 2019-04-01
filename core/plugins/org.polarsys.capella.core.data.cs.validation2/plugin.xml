@@ -352,6 +352,7 @@
          <command
                commandId="org.polarsys.capella.core.data.cs.validation2.propagateFxP2FE"
                icon="platform:/plugin/org.polarsys.capella.core.ui.resources/icons/full/obj16/capella_process.gif"
+               label="%menu_propagateFxP2FE_union"
                style="push">
             <parameter
                   name="mode"
@@ -364,6 +365,7 @@
          <command
                commandId="org.polarsys.capella.core.data.cs.validation2.propagateFxP2FE"
                icon="platform:/plugin/org.polarsys.capella.core.ui.resources/icons/full/obj16/capella_process.gif"
+               label="%menu_propagateFxP2FE_intersection"
                style="push">
             <parameter
                   name="mode"
