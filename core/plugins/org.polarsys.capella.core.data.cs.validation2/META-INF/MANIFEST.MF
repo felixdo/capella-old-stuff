@@ -2,19 +2,23 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: New validation rules for Interfaces & Exchange Items
 Bundle-SymbolicName: org.polarsys.capella.core.data.cs.validation2;singleton:=true
-Bundle-Version: 0.4.0.qualifier
+Bundle-Version: 0.5.0.qualifier
 Bundle-Activator: org.polarsys.capella.core.data.cs.validation2.Activator
 Require-Bundle: org.eclipse.core.runtime,
  org.polarsys.capella.core.validation;bundle-version="1.2.2",
  org.polarsys.capella.test.validation.rules.ju;resolution:=optional,
  org.polarsys.capella.core.validation.ui.ide,
- org.polarsys.capella.core.data.fa.ui.quickfix
+ org.polarsys.capella.core.data.fa.ui.quickfix,
+ org.eclipse.core.expressions,
+ org.eclipse.e4.core.contexts,
+ org.eclipse.sirius.diagram.ui;bundle-version="5.1.4"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: org.polarsys.capella.core.validation.cs.proto
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
 Export-Package: org.polarsys.capella.core.data.cs.validation2,
  org.polarsys.capella.core.data.cs.validation2.accel,
+ org.polarsys.capella.core.data.cs.validation2.accel.common,
  org.polarsys.capella.core.data.cs.validation2.helpers,
  org.polarsys.capella.core.data.cs.validation2.tests,
  org.polarsys.capella.core.data.cs.validation2.tests.common

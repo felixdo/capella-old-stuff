@@ -3,6 +3,7 @@ package org.polarsys.capella.core.data.cs.validation2;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Deque;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -12,10 +13,15 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
+import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.polarsys.capella.common.data.activity.InputPin;
 import org.polarsys.capella.common.data.activity.OutputPin;
+import org.polarsys.capella.common.data.modellingcore.ModelElement;
 import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.cs.Part;
 import org.polarsys.capella.core.data.fa.AbstractFunction;
@@ -25,6 +31,7 @@ import org.polarsys.capella.core.data.fa.FunctionInputPort;
 import org.polarsys.capella.core.data.fa.FunctionOutputPort;
 import org.polarsys.capella.core.data.fa.FunctionPort;
 import org.polarsys.capella.core.data.fa.FunctionalExchange;
+import org.polarsys.capella.core.data.information.ExchangeItem;
 import org.polarsys.capella.core.model.helpers.ComponentExt;
 
 public class ModelHelpers {
@@ -61,6 +68,26 @@ public class ModelHelpers {
 
   public static Collection<FunctionalExchange> getOutgoingInterfaceExchanges(FunctionOutputPort port, Component component){
     return port.getOutgoingFunctionalExchanges().stream().filter(fe->ExchangeExtent.of(fe, component) == ExchangeExtent.INTERFACE).collect(Collectors.toList());
+  }
+  
+  public static Collection<ExchangeItem> getExchangeItems(FunctionPort fp){
+    if (fp instanceof FunctionInputPort) {
+      return ((FunctionInputPort)fp).getIncomingExchangeItems();
+    }
+    if (fp instanceof FunctionOutputPort) {
+      return ((FunctionOutputPort)fp).getOutgoingExchangeItems();
+    }
+    return Collections.emptyList();
+  }
+  
+  public static Collection<FunctionalExchange> getFunctionalExchanges(FunctionPort fp){
+    if (fp instanceof FunctionInputPort) {
+      return ((FunctionInputPort)fp).getIncomingFunctionalExchanges();
+    }
+    if (fp instanceof FunctionOutputPort) {
+      return ((FunctionOutputPort)fp).getOutgoingFunctionalExchanges();
+    }
+    return Collections.emptyList();
   }
 
   private static <FxP extends FunctionPort> Predicate<FxP> isInterfaceFxP(Component component, Function<FxP, Collection<FunctionalExchange>> getFunctionalExchanges){
@@ -234,4 +261,29 @@ public class ModelHelpers {
         );
   }
 
+  public static Command asCommand(TransactionalEditingDomain domain, Runnable run) {
+    return new RecordingCommand(domain) {
+      @Override
+      protected void doExecute() {
+        run.run();
+      }
+    };
+  }
+
+  public static Stream<ModelElement> adapt(Stream<?> elements){
+    Class<ModelElement> clazz = ModelElement.class;
+    return elements.map(
+        (Object o) -> {
+          if (clazz.isInstance(o)) {
+            return (ModelElement) o;
+          } else if (o instanceof IAdaptable) {
+            ModelElement t = ((IAdaptable) o).getAdapter(clazz);
+            if (t != null) {
+              return t;
+            }
+          }
+          return Platform.getAdapterManager().getAdapter(o, clazz);
+        }
+        );
+  }
 }

@@ -293,14 +293,22 @@
             name="Validate Component Interfaces">
       </command>
       <command
-            id="org.polarsys.capella.core.data.cs.validation2.propagateFxP2FE"
-            name="%menu_propagateFxP2FE">
+            id="org.polarsys.capella.core.data.cs.validation2.pullFxPEI2FE"
+            name="%menu_pullFxPEI2FE">
          <commandParameter
                id="mode"
                name="Mode"
                optional="false"
                values="org.polarsys.capella.core.data.cs.validation2.accel.PropagationModes">
          </commandParameter>
+      </command>
+      <command
+            id="org.polarsys.capella.core.data.cs.validation2.pushFxPEI2FE"
+            name="%menu_pushFxPEI2FE">
+      </command>
+      <command
+            id="org.polarsys.capella.core.data.cs.validation2.removeFxPEINotOnFE"
+            name="%menu_removeFxPEINotOnFE">
       </command>
    </extension>
    <extension
@@ -326,15 +334,29 @@
       </handler>
       <handler
             class="org.polarsys.capella.core.data.cs.validation2.accel.PropagateFxP2FEHandler"
-            commandId="org.polarsys.capella.core.data.cs.validation2.propagateFxP2FE">
+            commandId="org.polarsys.capella.core.data.cs.validation2.pullFxPEI2FE">
          <activeWhen>
-            <and>
-               <iterate>
-                  <adapt
-                        type="org.polarsys.capella.core.data.fa.FunctionalExchange">
-                  </adapt>
-               </iterate>
-            </and></activeWhen>
+            <reference
+                  definitionId="org.polarsys.capella.core.data.cs.validation2.expressions.onlyFunctionalExchangesSelected">
+            </reference></activeWhen>
+      </handler>
+      <handler
+            class="org.polarsys.capella.core.data.cs.validation2.accel.AllocateAllExchangeItemsHandler"
+            commandId="org.polarsys.capella.core.data.cs.validation2.pushFxPEI2FE">
+         <activeWhen>
+            <reference
+                  definitionId="org.polarsys.capella.core.data.cs.validation2.expressions.onlyFunctionPortsSelected">
+            </reference>
+         </activeWhen>
+      </handler>
+      <handler
+            class="org.polarsys.capella.core.data.cs.validation2.accel.RemoveFxPEINotOnFE"
+            commandId="org.polarsys.capella.core.data.cs.validation2.removeFxPEINotOnFE">
+         <activeWhen>
+            <reference
+                  definitionId="org.polarsys.capella.core.data.cs.validation2.expressions.onlyFunctionPortsSelected">
+            </reference>
+         </activeWhen>
       </handler>
    </extension>
    <extension
@@ -350,9 +372,9 @@
             allPopups="true"
             locationURI="popup:capella.project.explorer.menu.accelerator?after=additions">
          <command
-               commandId="org.polarsys.capella.core.data.cs.validation2.propagateFxP2FE"
+               commandId="org.polarsys.capella.core.data.cs.validation2.pullFxPEI2FE"
                icon="platform:/plugin/org.polarsys.capella.core.ui.resources/icons/full/obj16/capella_process.gif"
-               label="%menu_propagateFxP2FE_union"
+               label="%menu_pullFxPEI2FE_union"
                style="push">
             <parameter
                   name="mode"
@@ -363,9 +385,9 @@
             </visibleWhen>
          </command>
          <command
-               commandId="org.polarsys.capella.core.data.cs.validation2.propagateFxP2FE"
+               commandId="org.polarsys.capella.core.data.cs.validation2.pullFxPEI2FE"
                icon="platform:/plugin/org.polarsys.capella.core.ui.resources/icons/full/obj16/capella_process.gif"
-               label="%menu_propagateFxP2FE_intersection"
+               label="%menu_pullFxPEI2FE_intersection"
                style="push">
             <parameter
                   name="mode"
@@ -376,9 +398,9 @@
             </visibleWhen>
          </command>
          <command
-               commandId="org.polarsys.capella.core.data.cs.validation2.propagateFxP2FE"
+               commandId="org.polarsys.capella.core.data.cs.validation2.pullFxPEI2FE"
                icon="platform:/plugin/org.polarsys.capella.core.ui.resources/icons/full/obj16/capella_process.gif"
-               label="%menu_propagateFxP2FE_select"
+               label="%menu_pullFxPEI2FE_select"
                style="push">
             <parameter
                   name="mode"
@@ -388,10 +410,85 @@
                   checkEnabled="true">
             </visibleWhen>
          </command>
+         <command
+               commandId="org.polarsys.capella.core.data.cs.validation2.pushFxPEI2FE"
+               icon="platform:/plugin/org.polarsys.capella.core.ui.resources/icons/full/obj16/capella_process.gif"
+               style="push">
+            <visibleWhen
+                  checkEnabled="true">
+            </visibleWhen>
+         </command>
+         <command
+               commandId="org.polarsys.capella.core.data.cs.validation2.removeFxPEINotOnFE"
+               icon="platform:/plugin/org.polarsys.capella.core.ui.resources/icons/full/obj16/capella_process.gif"
+               style="push">
+            <visibleWhen
+                  checkEnabled="true">
+            </visibleWhen>
+         </command>
       </menuContribution>
       <menuContribution
             allPopups="false"
-            locationURI="popup:org.eclipse.ui.popup.any?after=group.accelerator">
+            locationURI="popup:AcceleratorDiagramCommands">
+            <command
+               commandId="org.polarsys.capella.core.data.cs.validation2.pullFxPEI2FE"
+               icon="platform:/plugin/org.polarsys.capella.core.ui.resources/icons/full/obj16/capella_process.gif"
+               label="%menu_pullFxPEI2FE_union"
+               style="push">
+            <parameter
+                  name="mode"
+                  value="union">
+            </parameter>
+            <visibleWhen
+                  checkEnabled="true">
+            </visibleWhen>
+         </command>
+         <command
+               commandId="org.polarsys.capella.core.data.cs.validation2.pullFxPEI2FE"
+               icon="platform:/plugin/org.polarsys.capella.core.ui.resources/icons/full/obj16/capella_process.gif"
+               label="%menu_pullFxPEI2FE_intersection"
+               style="push">
+            <parameter
+                  name="mode"
+                  value="intersection">
+            </parameter>
+            <visibleWhen
+                  checkEnabled="true">
+            </visibleWhen>
+         </command>
+         <command
+               commandId="org.polarsys.capella.core.data.cs.validation2.pullFxPEI2FE"
+               icon="platform:/plugin/org.polarsys.capella.core.ui.resources/icons/full/obj16/capella_process.gif"
+               label="%menu_pullFxPEI2FE_select"
+               style="push">
+            <parameter
+                  name="mode"
+                  value="select">
+            </parameter>
+            <visibleWhen
+                  checkEnabled="true">
+            </visibleWhen>
+         </command>
+         <command
+               commandId="org.polarsys.capella.core.data.cs.validation2.pushFxPEI2FE"
+               icon="platform:/plugin/org.polarsys.capella.core.ui.resources/icons/full/obj16/capella_process.gif"
+               style="push">
+            <visibleWhen
+                  checkEnabled="true">
+            </visibleWhen>
+         </command>
+         <command
+               commandId="org.polarsys.capella.core.data.cs.validation2.removeFxPEINotOnFE"
+               icon="platform:/plugin/org.polarsys.capella.core.ui.resources/icons/full/obj16/capella_process.gif"
+               style="push">
+            <visibleWhen
+                  checkEnabled="true">
+            </visibleWhen>
+         </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:capella.project.explorer#PopupMenu?after=group.accelerator">
          <menu
                id="capella.project.explorer.menu.accelerator"
                label="Modeling Accelerators">
@@ -403,6 +500,58 @@
             </separator>
          </menu>
       </menuContribution>
+      <menuContribution
+            allPopups="true"
+            locationURI="popup:org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu?after=group.accelerator">
+         <menu
+               id="AcceleratorDiagramCommands"
+               label="Modeling Accelerators">
+            <separator
+                  name="groupAccelerator">
+            </separator>
+            <separator
+                  name="additions">
+            </separator>
+         </menu>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.core.expressions.definitions">
+      <definition
+            id="org.polarsys.capella.core.data.cs.validation2.expressions.onlyFunctionPortsSelected">
+         <iterate
+               ifEmpty="false"
+               operator="and">
+            <adapt
+                  type="org.polarsys.capella.common.data.modellingcore.ModelElement">
+               <instanceof
+                     value="org.polarsys.capella.core.data.fa.FunctionPort">
+               </instanceof>
+            </adapt>
+         </iterate>
+      </definition>
+      <definition
+            id="org.polarsys.capella.core.data.cs.validation2.expressions.onlyFunctionalExchangesSelected">
+         <iterate
+               operator="and">
+            <adapt
+                  type="org.polarsys.capella.common.data.modellingcore.ModelElement">
+               <instanceof
+                     value="org.polarsys.capella.core.data.fa.FunctionalExchange">
+               </instanceof>
+            </adapt>
+         </iterate>
+      </definition>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.adapters">
+      <factory
+            adaptableType="org.eclipse.sirius.diagram.ui.edit.api.part.IDiagramElementEditPart"
+            class="org.polarsys.capella.core.data.cs.validation2.IDiagramElementEditPartAdapterFactory">
+         <adapter
+               type="org.polarsys.capella.common.data.modellingcore.ModelElement">
+         </adapter>
+      </factory>
    </extension>
    
 </plugin>

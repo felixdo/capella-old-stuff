@@ -1,18 +1,16 @@
 package org.polarsys.capella.core.data.cs.validation2.accel;
 
+import static org.polarsys.capella.core.data.cs.validation2.ModelHelpers.createCommandCollector;
+import static org.polarsys.capella.core.data.cs.validation2.accel.HideAffectedObjectsCommandWrapper.hide;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 import java.util.function.Function;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
-import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.emf.common.command.Command;
-import org.eclipse.emf.common.command.CommandWrapper;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
@@ -25,46 +23,35 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import org.polarsys.capella.common.helpers.EObjectLabelProviderHelper;
 import org.polarsys.capella.common.ui.toolkit.dialogs.SelectElementsDialog;
 import org.polarsys.capella.core.data.cs.validation2.Activator;
-import org.polarsys.capella.core.data.cs.validation2.ModelHelpers;
+import org.polarsys.capella.core.data.cs.validation2.accel.common.DomainHandler;
 import org.polarsys.capella.core.data.fa.FaPackage;
 import org.polarsys.capella.core.data.fa.FunctionalExchange;
 import org.polarsys.capella.core.data.information.ExchangeItem;
 
-public class PropagateFxP2FEHandler extends AbstractHandler {
+public class PropagateFxP2FEHandler extends DomainHandler<FunctionalExchange> {
   
   public static final String PARAMETER_MODE = "parameterMode"; //$NON-NLS-1$
   public static final String MODE_UNION = "union"; //$NON-NLS-1$
   public static final String MODE_INTERSECTION = "intersection"; //$NON-NLS-1$
   public static final String MODE_SELECT = "select"; //$NON-NLS-1$
-  
-  @Override
-  public Object execute(ExecutionEvent event) throws ExecutionException {
-    List<?> selection = HandlerUtil.getCurrentStructuredSelection(event).toList();
+  private final EReference ref = FaPackage.Literals.FUNCTIONAL_EXCHANGE__EXCHANGED_ITEMS;
 
-    Map<TransactionalEditingDomain, List<FunctionalExchange>> fes = selection.stream()
-        .filter(FunctionalExchange.class::isInstance)
-        .map(FunctionalExchange.class::cast)
-        .collect(Collectors.groupingBy(TransactionUtil::getEditingDomain));
-
-    String mode = event.getParameter("mode"); //$NON-NLS-1$
-    EReference ref = FaPackage.Literals.FUNCTIONAL_EXCHANGE__EXCHANGED_ITEMS;
-    
-    for (final TransactionalEditingDomain domain : fes.keySet()) {
-      Command cmd = fes.get(domain).stream().collect(ModelHelpers.createCommandCollector(
-          // don't select any other object after completion..
-          (FunctionalExchange fe) ->
-            new CommandWrapper(AddCommand.create(domain, fe, ref, getModeFunction(event, mode).apply(fe))) {
-              public Collection<?> getAffectedObjects(){
-                return Collections.emptyList();
-              }
-            }
-          ));
-      domain.getCommandStack().execute(cmd);
-    }
-    return null;
+  public PropagateFxP2FEHandler() {
+    super(FunctionalExchange.class);
   }
 
-  private Function<FunctionalExchange, Collection<ExchangeItem>> getModeFunction(ExecutionEvent event, String mode) {
+
+  @Override
+  protected Command createCommand(ExecutionEvent event, TransactionalEditingDomain domain,
+      Stream<FunctionalExchange> list) {
+    return list.collect(createCommandCollector(
+        (FunctionalExchange fe) ->
+          hide(AddCommand.create(domain, fe, ref, getModeFunction(event).apply(fe))) 
+        ));
+  }
+
+  private Function<FunctionalExchange, Collection<ExchangeItem>> getModeFunction(ExecutionEvent event) {
+    String mode = event.getParameter(PARAMETER_MODE);
     Function<FunctionalExchange, Collection<ExchangeItem>> func = null;
     if (MODE_UNION.equals(mode)) {
       func = this::handleUnion;
@@ -90,13 +77,14 @@ public class PropagateFxP2FEHandler extends AbstractHandler {
     return ei;
   }
 
+  @SuppressWarnings("unchecked")
   private Collection<ExchangeItem> handleSelection(FunctionalExchange fes, Shell shell) {
     Collection<ExchangeItem> ei = handleUnion(fes);
     TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(fes);
     
     SelectElementsDialog dialog = new SelectElementsDialog(shell, domain, ((AdapterFactoryEditingDomain) domain).getAdapterFactory(), 
-        Activator.getResourceString("%propagateFxP2FE_dialogTitle"), //$NON-NLS-1$
-        NLS.bind(Activator.getResourceString("%propagateFxP2FE_dialogMessage"), EObjectLabelProviderHelper.getText(fes)), //$NON-NLS-1$
+        Activator.getResourceString("%pullFxPEI2FE_dialogTitle"), //$NON-NLS-1$
+        NLS.bind(Activator.getResourceString("%pullFxPEI2FE_dialogMessage"), EObjectLabelProviderHelper.getText(fes)), //$NON-NLS-1$
         ei);
     if (dialog.open() == Window.OK) {
       return (Collection<ExchangeItem>) dialog.getResult();
@@ -116,5 +104,6 @@ public class PropagateFxP2FEHandler extends AbstractHandler {
     ei.removeAll(fe.getExchangedItems());
     return ei;
   }
+
 
 }
