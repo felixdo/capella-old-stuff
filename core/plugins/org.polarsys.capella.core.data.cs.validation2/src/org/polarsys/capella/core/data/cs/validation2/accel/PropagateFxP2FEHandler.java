@@ -30,7 +30,7 @@ import org.polarsys.capella.core.data.information.ExchangeItem;
 
 public class PropagateFxP2FEHandler extends DomainHandler<FunctionalExchange> {
   
-  public static final String PARAMETER_MODE = "parameterMode"; //$NON-NLS-1$
+  public static final String PARAMETER_MODE = "mode"; //$NON-NLS-1$
   public static final String MODE_UNION = "union"; //$NON-NLS-1$
   public static final String MODE_INTERSECTION = "intersection"; //$NON-NLS-1$
   public static final String MODE_SELECT = "select"; //$NON-NLS-1$
@@ -83,8 +83,8 @@ public class PropagateFxP2FEHandler extends DomainHandler<FunctionalExchange> {
     TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(fes);
     
     SelectElementsDialog dialog = new SelectElementsDialog(shell, domain, ((AdapterFactoryEditingDomain) domain).getAdapterFactory(), 
-        Activator.getResourceString("%pullFxPEI2FE_dialogTitle"), //$NON-NLS-1$
-        NLS.bind(Activator.getResourceString("%pullFxPEI2FE_dialogMessage"), EObjectLabelProviderHelper.getText(fes)), //$NON-NLS-1$
+        Activator.getResourceString("%dialogTitle_pullFxPEI2FE_select"), //$NON-NLS-1$
+        NLS.bind(Activator.getResourceString("%dialogMessage_pullFxPEI2FE_select"), EObjectLabelProviderHelper.getText(fes)), //$NON-NLS-1$
         ei);
     if (dialog.open() == Window.OK) {
       return (Collection<ExchangeItem>) dialog.getResult();
