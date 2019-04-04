@@ -1,17 +1,7 @@
 package org.polarsys.capella.core.data.cs.validation2.tests.common;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.BiFunction;
-
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.validation.model.EvaluationMode;
-import org.eclipse.emf.validation.model.IConstraintStatus;
-import org.eclipse.emf.validation.service.ConstraintRegistry;
-import org.eclipse.emf.validation.service.IConstraintDescriptor;
-import org.eclipse.emf.validation.service.IConstraintFilter;
-import org.eclipse.emf.validation.service.IValidator;
 import org.eclipse.emf.validation.service.ModelValidationService;
 import org.eclipse.ui.statushandlers.StatusManager;
 

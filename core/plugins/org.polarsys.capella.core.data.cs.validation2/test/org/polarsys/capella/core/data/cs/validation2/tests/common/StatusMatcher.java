@@ -24,7 +24,7 @@ public class StatusMatcher {
   }
 
   public static FeatureMatcher<IStatus, Integer> severity(Matcher<? super Integer> matcher){
-    return new FeatureMatcher<IStatus, Integer>(matcher, "validation result severity", "severity") {
+    return new FeatureMatcher<IStatus, Integer>(matcher, "validation result severity", "severity") { //$NON-NLS-1$ //$NON-NLS-2$
       @Override
       protected Integer featureValueOf(IStatus actual) {
         return actual.getSeverity();

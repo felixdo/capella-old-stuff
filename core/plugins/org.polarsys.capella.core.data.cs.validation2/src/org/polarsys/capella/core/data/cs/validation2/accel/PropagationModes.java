@@ -7,6 +7,7 @@ import org.eclipse.core.commands.IParameterValues;
 
 public class PropagationModes implements IParameterValues {
 
+  @SuppressWarnings("nls")
   @Override
   public Map<String,String> getParameterValues() {
     Map<String, String> result = new HashMap<>();

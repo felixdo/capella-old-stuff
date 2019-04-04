@@ -5,16 +5,10 @@ import java.util.Iterator;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.validation.service.AbstractTraversalStrategy;
-import org.polarsys.capella.core.data.cs.Component;
-import org.polarsys.capella.core.data.cs.CsPackage;
 
 final class ProtoTraversalStrategy extends AbstractTraversalStrategy {
 
@@ -146,9 +140,5 @@ final class ProtoTraversalStrategy extends AbstractTraversalStrategy {
    return result;
  }
 
- private void initValidationModel() {
-   
- 
- }
  
 }
