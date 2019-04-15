@@ -34,9 +34,9 @@ public class FxPFEAllocationTest1 extends IFEAllocationTestTemplate {
       allocate(ei1).on(left.fop1_1);
     });
 
-    // finds ei1 on left.fop1_1 which has no interfacing exchanges => error
-    assertThat(unusedFxPExchangeItems(left.component), is(not(okStatus())));
-    
+    // finds ei1 on left.fop1_1 which has no interfacing exchanges => ok, covered by new rule
+    assertThat(unusedFxPExchangeItems(left.component), is(okStatus()));
+
     // unused ei on the internal exchange is no problem
     executeCommand(() -> allocate(ei2).on(fe1));
     assertThat(unusedFEExchangeItems(left.component), is(okStatus()));

@@ -253,6 +253,24 @@
                      class="ComponentPort">
                </target>
             </constraint>
+            <constraint
+                  class="org.polarsys.capella.core.data.cs.validation2.AllocatedFxPImpliesInterfacingFE"
+                  id="org.polarsys.capella.core.data.cs.validation2.allocatedFxPImpliesInterfacingExchange"
+                  isEnabledByDefault="true"
+                  lang="Java"
+                  mode="Batch"
+                  name="%allocatedfxpimpliesinterfacingexchange_name"
+                  severity="ERROR"
+                  statusCode="0">
+               <message>
+                  %allocatedfxpimpliesinterfacingexchange_message
+               </message>
+               <description>
+                  %allocatedfxpimpliesinterfacingexchange_description
+               </description>
+               <target
+                     class="FunctionPort"></target>
+            </constraint>
          </constraints>
       </constraintProvider>
       <constraintProvider

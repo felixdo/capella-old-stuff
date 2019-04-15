@@ -64,6 +64,12 @@ public class FE_FxP_ExchangeItemConsistency extends AbstractComponentValidationR
  
     for (P p : getFunctionPorts.apply(func)) {
       Collection<FunctionalExchange> fes = getFunctionalExchanges.apply(p);
+
+      if (fes.isEmpty()) {
+        // this is now handled by a different rule: AllocatedFxPImpliesInterfacingFE
+        continue;
+      }
+
       for (ExchangeItem ei : getExchangeItems.apply(p)) {
         boolean missing = true;
 
