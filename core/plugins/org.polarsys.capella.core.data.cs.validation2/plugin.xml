@@ -288,11 +288,6 @@
    <extension
          point="org.eclipse.ui.commands">
       <command
-            description="Validate Interfaces between selected components"
-            id="org.polarsys.capella.core.data.cs.validation2.validateInterfaces"
-            name="Validate Component Interfaces">
-      </command>
-      <command
             id="org.polarsys.capella.core.data.cs.validation2.pullFxPEI2FE"
             name="%menu_pullFxPEI2FE">
          <commandParameter
@@ -313,25 +308,6 @@
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
-      <handler
-            class="org.polarsys.capella.core.data.cs.validation2.ValidateInterfacesHandler"
-            commandId="org.polarsys.capella.core.data.cs.validation2.validateInterfaces">
-         <activeWhen>
-            <and>
-               <count
-                     value="(1-2)">
-               </count>
-               <iterate>
-                  <adapt
-                        type="org.eclipse.emf.ecore.EObject">
-                     <instanceof
-                           value="org.polarsys.capella.core.data.cs.Component">
-                     </instanceof>
-                  </adapt>
-               </iterate>
-            </and>
-         </activeWhen>
-      </handler>
       <handler
             class="org.polarsys.capella.core.data.cs.validation2.accel.PropagateFxP2FEHandler"
             commandId="org.polarsys.capella.core.data.cs.validation2.pullFxPEI2FE">
@@ -552,6 +528,19 @@
                type="org.polarsys.capella.common.data.modellingcore.ModelElement">
          </adapter>
       </factory>
+   </extension>
+   <extension
+         point="org.eclipse.emf.validation.traversal">
+      <traversalStrategy
+            class="org.polarsys.capella.core.data.cs.validation2.ProtoTraversalStrategy"
+            namespaceUri="http://www.polarsys.org/capella/core/modeller/1.2.0">
+         <eclass
+               name="Project">
+         </eclass>
+         <eclass
+               name="Library">
+         </eclass>
+      </traversalStrategy>
    </extension>
    
 </plugin>

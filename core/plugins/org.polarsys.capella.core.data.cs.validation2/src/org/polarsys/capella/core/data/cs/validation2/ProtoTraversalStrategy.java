@@ -2,6 +2,7 @@ package org.polarsys.capella.core.data.cs.validation2;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -9,36 +10,30 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.validation.service.AbstractTraversalStrategy;
+import org.polarsys.capella.core.data.cs.Component;
 
-final class ProtoTraversalStrategy extends AbstractTraversalStrategy {
+/*
+ * A variation of recursive traversal strategy that includes
+ * validation of deployed functions for every validated component
+ */
+public final class ProtoTraversalStrategy extends AbstractTraversalStrategy {
 
  private Collection<EObject> roots;
  private boolean contextChanged = true;
 
- 
  @Override
      public void startTraversal(
      Collection<? extends EObject> traversalRoots,
      IProgressMonitor progressMonitor) {
-   
-   
-//   EObject context = traversalRoots.iterator().next();
-//   ()
-//   
-//   Component[] comps = new Component[2];
-//   Iterator<Component> it = (Iterator<Component>) traversalRoots.iterator();
-//   for (int i = 0; i < comps.length; i++) {
-//     if (it.hasNext()) {
-//       comps[i] = it.next();
-//     }
-//   }
-//   if (comps[1] != null) {
-//     
-//   }
-//   
-   roots = makeTargetsDisjoint(traversalRoots);
-   
-   
+
+   Collection<EObject> newTraversalRoots = new LinkedHashSet<EObject>(traversalRoots);
+   for (Iterator<EObject> it = EcoreUtil.getAllContents(traversalRoots); it.hasNext();) {
+     EObject next = it.next();
+     if (next instanceof Component) {
+       newTraversalRoots.addAll(((Component)next).getAllocatedFunctions());
+     }
+   }
+   roots = makeTargetsDisjoint(newTraversalRoots);
    super.startTraversal(traversalRoots, progressMonitor);
  }
  
@@ -56,13 +51,10 @@ final class ProtoTraversalStrategy extends AbstractTraversalStrategy {
  
  private int countRecursive(Collection<? extends EObject> elements) {
    int result = 0;
-   
    result = elements.size();
-   
    for (EObject next : elements) {
      result = result + countRecursive(next.eContents());
    }
-   
    return result;
  }
  
