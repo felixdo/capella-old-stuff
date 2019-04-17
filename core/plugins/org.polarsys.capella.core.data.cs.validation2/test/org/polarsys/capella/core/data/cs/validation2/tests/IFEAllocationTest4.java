@@ -23,7 +23,7 @@ import org.polarsys.capella.core.model.skeleton.CapellaModelSkeleton;
 
 /**
  * Test that ExchangeItem on Interface between parent components is justified if there's an FE between sub-components
- * that uses the Exchange Item
+ * that uses the Exchange Item:
  */
 public class IFEAllocationTest4 extends IFEAllocationTestTemplate {
 
@@ -79,6 +79,16 @@ public class IFEAllocationTest4 extends IFEAllocationTestTemplate {
     assertThat(unusedEIOnInterfaces(center.component, true), is(okStatus()));
     assertThat(unusedEIOnInterfaces(left.component, false), is(okStatus()));
     assertThat(unusedEIOnInterfaces(left.component, true), is(okStatus()));
+
+    // the other direction should also work
+    assertThat(unusedEIOnFunctionalExchanges(left.component, true), is(okStatus()));
+    assertThat(unusedEIOnFunctionalExchanges(left.component, true), is(okStatus()));
+    
+    // deallocates the fp from the cp
+    undo();
+
+    assertThat(unusedEIOnFunctionalExchanges(left.component, false), is(okStatus()));
+    assertThat(unusedEIOnFunctionalExchanges(center.component, false), is(okStatus()));
 
   }
 

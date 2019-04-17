@@ -32,6 +32,7 @@ import org.polarsys.capella.core.data.fa.FunctionOutputPort;
 import org.polarsys.capella.core.data.fa.FunctionPort;
 import org.polarsys.capella.core.data.fa.FunctionalExchange;
 import org.polarsys.capella.core.data.information.ExchangeItem;
+import org.polarsys.capella.core.data.information.Partition;
 import org.polarsys.capella.core.model.helpers.ComponentExt;
 
 public class ModelHelpers {
@@ -209,6 +210,24 @@ public class ModelHelpers {
     return result;
   }
 
+  public static Collection<Component> getComponentHierarchyUpwards(Component child){
+    Collection<Component> result = new LinkedHashSet<>();
+    Deque<Component> toVisit = new ArrayDeque<>();
+    toVisit.add(child);
+    while (toVisit.size() > 0) {
+      Component next = toVisit.pop();
+      if (result.add(next)) {
+        for (Partition p : next.getRepresentingPartitions()) {
+          Component parent = ComponentExt.getDirectParent(p);
+          if (parent != null) {
+            toVisit.add(parent);
+          }
+        }
+      }
+    }
+    return result;
+  }
+
   
   /**
    * The default allocator component for a Function Port is the component that allocates the ports owning function,
@@ -227,30 +246,37 @@ public class ModelHelpers {
     }
     return null;
   }
-  
-  private static Collection<ComponentPort> getAllocatorComponentPortCandidates(FunctionPort fp){
+
+  public static Collection<ComponentPort> getAllocatorComponentPortCandidates(FunctionPort fp){
     Collection<ComponentPort> result = new ArrayList<ComponentPort>();
     AbstractFunction af = (AbstractFunction) fp.eContainer();
     for (AbstractFunctionalBlock afb : af.getAllocationBlocks()) {
       if (afb instanceof Component) {
-        result.addAll(((Component) afb).getContainedComponentPorts());
+        for (Component comp : getComponentHierarchyUpwards((Component) afb)) {
+          result.addAll(((Component) comp).getContainedComponentPorts());
+        }
       }
     }
     return result;
   }
-  
+
+  public static Collection<ComponentPort> getAllocatorComponentPortsWithFallback(FunctionPort fp){
+    return getAllocatorComponentPortsWithFallback(fp, ModelHelpers::getAllocatorComponentPortCandidates);
+  }
+
   /**
    * If the given fp has one or more allocator component ports, returns a collection
-   * containing these allocator ports, otherwise returns all component ports of
-   * the component that allocates the function.
+   * containing these allocator ports, otherwise returns the result of invoking the
+   * fallback function for the argument fp.
+   * 
    * @param fp
    * @return
    */
-  public static Collection<ComponentPort> getAllocatorComponentPortsWithFallback(FunctionPort fp){
+  public static Collection<ComponentPort> getAllocatorComponentPortsWithFallback(FunctionPort fp, Function<FunctionPort, Collection<ComponentPort>> fallback){
     if (fp.getAllocatorComponentPorts().size() > 0) {
       return fp.getAllocatorComponentPorts();
     }
-    return getAllocatorComponentPortCandidates(fp);
+    return fallback.apply(fp);
   }
 
   public static <T> Collector<T, ?, Command> createCommandCollector(Function<T, Command> handler){
