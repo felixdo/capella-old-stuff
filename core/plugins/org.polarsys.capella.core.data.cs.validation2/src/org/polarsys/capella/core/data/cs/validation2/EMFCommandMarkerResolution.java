@@ -40,5 +40,5 @@ public class EMFCommandMarkerResolution extends AbstractCapellaMarkerResolution 
       }
     }
   }
-  
+
 }
