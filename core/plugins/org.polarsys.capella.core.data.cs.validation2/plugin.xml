@@ -560,5 +560,21 @@
          </eclass>
       </traversalStrategy>
    </extension>
+   <extension
+         point="org.polarsys.capella.core.validation.ui.ide.capellaQuickFix">
+      <resolver
+            class="org.polarsys.capella.core.data.cs.validation2.XPExchangeNameQuickfix"
+            label="%xp_exchange_name_quickfix_unbound">
+         <rules
+               ruleId="org.polarsys.capella.core.data.cs.validation2.fxp_fe_name">
+         </rules>
+         <rules
+               ruleId="org.polarsys.capella.core.data.cs.validation2.cp_ce_name">
+         </rules>
+         <rules
+               ruleId="org.polarsys.capella.core.data.cs.validation2.pp_pl_name">
+         </rules>
+      </resolver>
+   </extension>
    
 </plugin>
