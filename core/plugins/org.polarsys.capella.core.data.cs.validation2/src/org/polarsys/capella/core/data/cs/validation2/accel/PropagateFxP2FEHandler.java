@@ -85,7 +85,7 @@ public class PropagateFxP2FEHandler extends DomainHandler<FunctionalExchange> {
     SelectElementsDialog dialog = new SelectElementsDialog(shell, domain, ((AdapterFactoryEditingDomain) domain).getAdapterFactory(), 
         Activator.getResourceString("%dialogTitle_pullFxPEI2FE_select"), //$NON-NLS-1$
         NLS.bind(Activator.getResourceString("%dialogMessage_pullFxPEI2FE_select"), EObjectLabelProviderHelper.getText(fes)), //$NON-NLS-1$
-        ei);
+        ei, true, null);
     if (dialog.open() == Window.OK) {
       return (Collection<ExchangeItem>) dialog.getResult();
     } else {
